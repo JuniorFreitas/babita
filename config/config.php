@@ -26,7 +26,7 @@ define('ENVIRONMENT', 'development');
 /**
  * Define relative base path.
  */
-define('DIR', 'http://localhost/My/babita/');
+define('DIR', '/');
 
 /**
  * System path
