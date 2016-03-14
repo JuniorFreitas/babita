@@ -24,21 +24,21 @@ class Hooks
      * Array of plugins.
      * @var array
      */
-    private static $plugins = array();
+    private static $plugins = [];
 
     /**
      * Array of available hooks.
      *
      * @var array
      */
-    private static $hooks = array();
+    private static $hooks = [];
 
     /**
      * Array of instances - for the purpose of reusing the same instance.
      *
      * @var array
      */
-    private static $instances = array();
+    private static $instances = [];
 
     /**
      * Initial hooks.
@@ -55,14 +55,14 @@ class Hooks
         }
 
         //define hooks
-        self::setHooks(array(
+        self::setHooks([
             'meta',
             'css',
             'afterBody',
             'footer',
             'js',
             'routes'
-        ));
+        ]);
 
         //load modules
         self::loadPlugins(BABITA.DS.MODULES_PATH);
@@ -165,7 +165,7 @@ class Hooks
                     $segments = explode('@', $last);
 
                     $classname = new $segments[0]();
-                    $result = call_user_func(array($classname, $segments[1]), $result);
+                    $result = call_user_func([$classname, $segments[1]], $result);
 
                 } else {
                     if (function_exists($hook)) {
