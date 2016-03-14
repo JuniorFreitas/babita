@@ -1,0 +1,5 @@
+/.phpintel
+/vendor
+logs/*
+.DS_Store
+composer.lock
