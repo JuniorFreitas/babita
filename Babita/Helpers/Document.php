@@ -30,12 +30,12 @@ class Document
      */
     public static function getFileType($extension)
     {
-        $images = array('jpg', 'gif', 'png', 'bmp');
-        $docs   = array('txt', 'rtf', 'doc', 'docx', 'pdf');
-        $apps   = array('zip', 'rar', 'exe', 'html');
-        $video  = array('mpg', 'wmv', 'avi', 'mp4');
-        $audio  = array('wav', 'mp3');
-        $db     = array('sql', 'csv', 'xls','xlsx');
+        $images = ['jpg', 'gif', 'png', 'bmp'];
+        $docs   = ['txt', 'rtf', 'doc', 'docx', 'pdf'];
+        $apps   = ['zip', 'rar', 'exe', 'html'];
+        $video  = ['mpg', 'wmv', 'avi', 'mp4'];
+        $audio  = ['wav', 'mp3'];
+        $db     = ['sql', 'csv', 'xls','xlsx'];
 
         if (in_array($extension, $images)) {
             return "Image";
@@ -68,7 +68,7 @@ class Document
      */
     public static function formatBytes($bytes, $precision = 2)
     {
-        $units = array('B', 'KB', 'MB', 'GB', 'TB');
+        $units = ['B', 'KB', 'MB', 'GB', 'TB'];
 
         $bytes = max($bytes, 0);
         $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
