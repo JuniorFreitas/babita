@@ -155,7 +155,7 @@ class Date
     {
         $begin    = new \DateTime($startDate);
         $end      = new \DateTime($endDate);
-        $holiday  = array();
+        $holiday  = [];
         $interval = new \DateInterval('P1D');
         $dateRange= new \DatePeriod($begin, $interval, $end);
         foreach ($dateRange as $date) {
@@ -190,7 +190,7 @@ class Date
                 return 29;
             }
         }
-        $days_in_month = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+        $days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
         return $days_in_month[$month - 1];
     }
 
@@ -312,8 +312,8 @@ class Date
     public static function makeAgo($timestamp)
     {
             $difference = time() - $timestamp;
-            $periods = array("sec", "min", "hr", "day", "week", "month", "year", "decade");
-            $lengths = array("60","60","24","7","4.35","12","10");
+            $periods = ["sec", "min", "hr", "day", "week", "month", "year", "decade"];
+            $lengths = ["60","60","24","7","4.35","12","10"];
             for($j = 0; $difference >= $lengths[$j]; $j++)
                 $difference /= $lengths[$j];
                 $difference = round($difference);
