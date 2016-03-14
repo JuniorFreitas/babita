@@ -34,7 +34,7 @@ class Tags
         //replace spacer code for a space
         $data[1] = str_replace("&nbsp;", " ", $data[1]);
         $parts = explode(" ", $data[1]);
-        $params = array();
+        $params = [];
 
         foreach ($parts as $part) {
             if (!empty($part)) {
