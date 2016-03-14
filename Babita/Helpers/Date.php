@@ -305,4 +305,20 @@ class Date
     {
         return static::difference($birth_date)->y;
     }
+
+    /**
+     * Make ago time
+     */
+    public static function makeAgo($timestamp)
+    {
+            $difference = time() - $timestamp;
+            $periods = array("sec", "min", "hr", "day", "week", "month", "year", "decade");
+            $lengths = array("60","60","24","7","4.35","12","10");
+            for($j = 0; $difference >= $lengths[$j]; $j++)
+                $difference /= $lengths[$j];
+                $difference = round($difference);
+            if($difference != 1) $periods[$j].= "s";
+                $text = "$difference $periods[$j] ago";
+                return $text;
+    }
 }
