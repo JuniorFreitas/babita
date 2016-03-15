@@ -3,13 +3,13 @@
  * Date Helper
  *
  * @author David Carr - dave@daveismyname.com
- * @version Babita 1.0
+ * @version 1.0
  * @date May 18 2015
  * @date updated Sept 19, 2015
  *---------------------------------------------------------------------------------------
  * Modified from SMVC 2.2 - https://github.com/simple-mvc-framework/framework.git
  * @author Fábio Assunção da Silva - fabioassuncao.com
- * @version Babita 1.0
+ * @version 1.0
  * @date February 06, 2016
  *---------------------------------------------------------------------------------------
  */

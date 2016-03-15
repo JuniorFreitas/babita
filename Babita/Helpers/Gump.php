@@ -10,7 +10,7 @@
  *---------------------------------------------------------------------------------------
  * Modified from SMVC 2.2 - https://github.com/simple-mvc-framework/framework.git
  * @author Fábio Assunção da Silva - fabioassuncao.com
- * @version Babita 1.0
+ * @version 1.0
  * @date February 06, 2016
  *---------------------------------------------------------------------------------------
  */
@@ -656,59 +656,6 @@ class Gump
     {
         return preg_replace("/(?![.=$'€%-])\p{P}/u", '', $value);
     }
-
-    /**
-     * Translate an input string to a desired language [DEPRECIATED]
-     *
-     * Any ISO 639-1 2 character language code may be used
-     *
-     * See: http://www.science.co.il/language/Codes.asp?s=code2
-     *
-     * @access protected
-     * @param  string $value
-     * @param  array $params
-     * @return string
-     */
-    /*
-    protected function filter_translate($value, $params = NULL)
-    {
-        $input_lang  = 'en';
-        $output_lang = 'en';
-
-        if(is_null($params))
-        {
-            return $value;
-        }
-
-        switch(count($params))
-        {
-            case 1:
-                $input_lang  = $params[0];
-                break;
-            case 2:
-                $input_lang  = $params[0];
-                $output_lang = $params[1];
-                break;
-        }
-
-        $text = urlencode($value);
-
-        $translation = file_get_contents(
-            "http://ajax.googleapis.com/ajax/services/language/translate?v=1.0&q={$text}&langpair={$input_lang}|{$output_lang}"
-        );
-
-        $json = json_decode($translation, true);
-
-        if($json['responseStatus'] != 200)
-        {
-            return $value;
-        }
-        else
-        {
-            return $json['responseData']['translatedText'];
-        }
-    }
-    */
 
     /**
      * Sanitize the string by removing any script tags
