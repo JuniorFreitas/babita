@@ -85,7 +85,7 @@ class Gump
                                      very,was,way,we,well,were,what,where,which,while,who,with,would,you,your,a,
                                      b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,$,1,2,3,4,5,6,7,8,9,0,_";
 
-    // ** ------------------------- Validation Helpers ---------------------------- ** //
+    // *=============== Validation Helpers ===============* //
 
     /**
      * Shorthand method for inline validation
@@ -153,7 +153,7 @@ class Gump
      */
     public static function addValidator($rule, $callback)
     {
-        $method = 'validate'.$rule;
+        $method = 'validate' . $rule;
 
         if(method_exists(__CLASS__, $method) || isset(self::$validationMethods[$rule])){
             throw new \Exception("Validator rule '$rule' already exists.");
@@ -174,7 +174,7 @@ class Gump
      */
     public static function addFilter($rule, $callback)
     {
-        $method = 'filter'.$rule;
+        $method = 'filter' . $rule;
 
         if(method_exists(__CLASS__, $method) || isset(self::$filterMethods[$rule])){
             throw new \Exception("Filter rule '$rule' already exists.");
@@ -302,8 +302,7 @@ class Gump
                         $value = trim($value);
                     }
 
-                    if(function_exists('iconv') && function_exists('mb_detect_encoding') && $utf8_encode)
-                    {
+                    if(function_exists('iconv') && function_exists('mb_detect_encoding') && $utf8_encode){
                         $current_encoding = mb_detect_encoding($value);
 
                         if($current_encoding != 'UTF-8' && $current_encoding != 'UTF-16'){
@@ -343,13 +342,11 @@ class Gump
     {
         $this->errors = [];
 
-        foreach($ruleset as $field => $rules)
-        {
+        foreach($ruleset as $field => $rules){
 
             $rules = explode('|', $rules);
 
-            if(in_array("required", $rules) || (isset($input[$field]) && trim($input[$field]) != ''))
-            {
+            if(in_array("required", $rules) || (isset($input[$field]) && trim($input[$field]) != '')){
                 foreach($rules as $rule)
                 {
                     $method = null;
@@ -455,27 +452,33 @@ class Gump
                     break;
 
                 case 'validateMaxLen':
+
                     if($param == 1){
                         $resp[] = "The <span class=\"$fieldClass\">$field</span> field needs to be shorter than $param character";
                     } else {
                         $resp[] = "The <span class=\"$fieldClass\">$field</span> field needs to be shorter than $param characters";
                     }
+
                     break;
 
                 case 'validateMinLen':
+
                     if($param == 1){
                         $resp[] = "The <span class=\"$fieldClass\">$field</span> field needs to be longer than $param character";
                     } else {
                         $resp[] = "The <span class=\"$fieldClass\">$field</span> field needs to be longer than $param characters";
                     }
+
                     break;
 
                 case 'validateExactLen':
+
                     if($param == 1){
                         $resp[] = "The <span class=\"$fieldClass\">$field</span> field needs to be exactly $param character in length";
                     } else {
                         $resp[] = "The <span class=\"$fieldClass\">$field</span> field needs to be exactly $param characters in length";
                     }
+
                     break;
 
                 case 'validateAlpha':
@@ -592,12 +595,11 @@ class Gump
                     $filter = explode(',', $filter);
 
                     $params = array_slice($filter, 1, count($filter) - 1);
-
                     $filter = $filter[0];
                 }
 
-                if(is_callable([$this, 'filter_'.$filter])){
-                    $method = 'filter_'.$filter;
+                if(is_callable([$this, 'filter'.$filter])){
+                    $method = 'filter'.$filter;
                     $input[$field] = $this->$method($input[$field], $params);
                 }
 
@@ -691,7 +693,7 @@ class Gump
      * @param  array $params
      * @return string
      */
-    protected function filterUrlencode($value, $params = null)
+    protected function filterUrlEncode($value, $params = null)
     {
         return filter_var($value, FILTER_SANITIZE_ENCODED);
     }
