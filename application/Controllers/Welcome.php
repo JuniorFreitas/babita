@@ -9,7 +9,7 @@
  *---------------------------------------------------------------------------------------
  * Modified from SMVC 2.2 - https://github.com/simple-mvc-framework/framework.git
  * @author Fábio Assunção da Silva - fabioassuncao.com
- * @version Babita 1.0
+ * @version 1.0
  * @date March 13, 2016
  *---------------------------------------------------------------------------------------
  */
