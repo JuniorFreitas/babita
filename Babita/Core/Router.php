@@ -10,7 +10,7 @@
  * @author Fábio Assunção da Silva - fabioassuncao.com
  * @version 1.0
  * @date February 06, 2016
- * @date update February 08, 2016
+ * @date updated February 08, 2016
  *---------------------------------------------------------------------------------------
  */
 
