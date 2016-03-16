@@ -96,7 +96,7 @@ class Ftp
     public function folderPermission($folderChmod, $permission)
     {
         if (ftp_chmod($this->conn, $permission, $folderChmod) !== false) {
-            return "<p>$folderChmod chmoded successfully to ".$permission."</p>\n";
+            return "{$folderChmod} chmoded successfully to {$permission} \n";
         }
     }
 
@@ -111,9 +111,9 @@ class Ftp
     public function uploadFile($remoteFile, $localFile)
     {
         if (ftp_put($this->conn, $this->basePath.$remoteFile, $localFile, FTP_ASCII)) {
-            return "<p>successfully uploaded $localFile to $remoteFile</p>\n";
+            return "successfully uploaded {$localFile} to {$remoteFile}\n";
         } else {
-            return "<p>There was a problem while uploading $remoteFile</p>\n";
+            return "There was a problem while uploading {$remoteFile}\n";
         }
     }
 
