@@ -21,7 +21,7 @@ Although a database is not required, if a database is to be used the system is d
 
 ## Installation
 
-1. [Download](https://github.com/babita-framework/babita/archive/master.zip) the framework.
+1. [Download](https://github.com/codions/babita/archive/master.zip) the framework.
 2. Unzip the package.
 3. To run [composer](https://getcomposer.org/), navigate to your project on a terminal/command prompt, then run `composer install`. That will update the vendor folder. Or use the vendor folder as is (composer is not required for this step).
 Upload the framework files to your server. Normally the `index.php` file will be at your root. Can be placed to the directory public.
