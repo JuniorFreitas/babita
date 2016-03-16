@@ -98,7 +98,7 @@ class Gump
     {
         $this->validationRules($validators);
 
-        if($this->run($data) === false){
+        if ($this->run($data) === false) {
             return $this->getReadableErrors(false);
         } else {
             return true;
@@ -136,7 +136,7 @@ class Gump
      */
     public static function xssClean(array $data)
     {
-        foreach($data as $k => $v){
+        foreach ($data as $k => $v) {
             $data[$k] = filter_var($v, FILTER_SANITIZE_STRING);
         }
 
@@ -155,7 +155,7 @@ class Gump
     {
         $method = 'validate' . $rule;
 
-        if(method_exists(__CLASS__, $method) || isset(self::$validationMethods[$rule])){
+        if (method_exists(__CLASS__, $method) || isset(self::$validationMethods[$rule])) {
             throw new \Exception("Validator rule '$rule' already exists.");
         }
 
@@ -176,7 +176,7 @@ class Gump
     {
         $method = 'filter' . $rule;
 
-        if(method_exists(__CLASS__, $method) || isset(self::$filterMethods[$rule])){
+        if (method_exists(__CLASS__, $method) || isset(self::$filterMethods[$rule])) {
             throw new \Exception("Filter rule '$rule' already exists.");
         }
 
@@ -193,7 +193,7 @@ class Gump
      */
     public function validationRules(array $rules = [])
     {
-        if(empty($rules)){
+        if (empty($rules)) {
             return $this->validationRules;
         }
 
@@ -208,7 +208,7 @@ class Gump
      */
     public function filterRules(array $rules = [])
     {
-        if(empty($rules)){
+        if (empty($rules)) {
             return $this->filterRules;
         }
 
@@ -231,11 +231,11 @@ class Gump
             $data, $this->validationRules()
         );
 
-        if($check_fields === true){
+        if ($check_fields === true) {
             $this->checkFields($data);
         }
 
-        if($validated !== true){
+        if ($validated !== true) {
             return false;
         }
 
@@ -253,7 +253,7 @@ class Gump
         $mismatch = array_diff_key($data, $ruleset);
         $fields   = array_keys($mismatch);
 
-        foreach ($fields as $field){
+        foreach ($fields as $field) {
             $this->errors[] = [
                 'field' => $field,
                 'value' => $data[$field],
@@ -276,15 +276,15 @@ class Gump
     {
         $magic_quotes = (bool)get_magic_quotes_gpc();
 
-        if(is_null($fields)){
+        if (is_null($fields)) {
             $fields = array_keys($input);
         }
 
         $return = [];
 
-        foreach($fields as $field){
+        foreach ($fields as $field) {
 
-            if(!isset($input[$field])){
+            if (!isset($input[$field])) {
                 continue;
             }
 
@@ -292,20 +292,20 @@ class Gump
 
                 $value = $input[$field];
 
-                if(is_string($value)){
+                if (is_string($value)) {
 
-                    if($magic_quotes === true){
+                    if ($magic_quotes === true) {
                         $value = stripslashes($value);
                     }
 
-                    if(strpos($value, "\r") !== false){
+                    if (strpos($value, "\r") !== false) {
                         $value = trim($value);
                     }
 
-                    if(function_exists('iconv') && function_exists('mb_detect_encoding') && $utf8_encode){
+                    if (function_exists('iconv') && function_exists('mb_detect_encoding') && $utf8_encode) {
                         $current_encoding = mb_detect_encoding($value);
 
-                        if($current_encoding != 'UTF-8' && $current_encoding != 'UTF-16'){
+                        if ($current_encoding != 'UTF-8' && $current_encoding != 'UTF-16') {
                             $value = iconv($current_encoding, 'UTF-8', $value);
                         }
                     }
@@ -342,17 +342,17 @@ class Gump
     {
         $this->errors = [];
 
-        foreach($ruleset as $field => $rules){
+        foreach ($ruleset as $field => $rules) {
 
             $rules = explode('|', $rules);
 
-            if(in_array("required", $rules) || (isset($input[$field]) && trim($input[$field]) != '')){
-                foreach($rules as $rule)
+            if (in_array("required", $rules) || (isset($input[$field]) && trim($input[$field]) != '')) {
+                foreach ($rules as $rule)
                 {
                     $method = null;
                     $param  = null;
 
-                    if(strstr($rule, ',') !== false){
+                    if (strstr($rule, ',') !== false) {
 
                         $rule   = explode(',', $rule);
                         $method = 'validate'.$rule[0];
@@ -364,19 +364,19 @@ class Gump
                         $method = 'validate'.$rule;
                     }
 
-                    if(is_callable([$this, $method])){
+                    if (is_callable([$this, $method])) {
                         $result = $this->$method($field, $input, $param);
 
-                        if(is_array($result)){
+                        if (is_array($result)) {
                             $this->errors[] = $result;
                         }
                     }
-                    else if(isset(self::$validationMethods[$rule])){
+                    elseif (isset(self::$validationMethods[$rule])) {
 
-                        if(isset($input[$field])){
+                        if (isset($input[$field])) {
                             $result = call_user_func(self::$validationMethods[$rule], $field, $input, $param);
 
-                            if(!$result){
+                            if (!$result) {
 
                                 $this->errors[] = [
                                     'field' => $field,
@@ -421,23 +421,23 @@ class Gump
      */
     public function getReadableErrors($convertToString = false, $fieldClass="field", $errorClass="error-message")
     {
-        if(empty($this->errors)){
+        if (empty($this->errors)) {
             return ($convertToString)? null : [];
         }
 
         $resp = [];
 
-        foreach($this->errors as $e){
+        foreach ($this->errors as $e) {
 
             $field = ucwords(str_replace(['_','-'], ' ', $e['field']));
             $param = $e['param'];
 
             // Let's fetch explicit field names if they exist
-            if(array_key_exists($e['field'], self::$fields)){
+            if (array_key_exists($e['field'], self::$fields)) {
                 $field = self::$fields[$e['field']];
             }
 
-            switch($e['rule']){
+            switch ($e['rule']) {
 
                 case 'mismatch' :
                     $resp[] = "There is no validation rule for <span class=\"$fieldClass\">$field</span>";
@@ -453,7 +453,7 @@ class Gump
 
                 case 'validateMaxLen':
 
-                    if($param == 1){
+                    if ($param == 1) {
                         $resp[] = "The <span class=\"$fieldClass\">$field</span> field needs to be shorter than $param character";
                     } else {
                         $resp[] = "The <span class=\"$fieldClass\">$field</span> field needs to be shorter than $param characters";
@@ -463,7 +463,7 @@ class Gump
 
                 case 'validateMinLen':
 
-                    if($param == 1){
+                    if ($param == 1) {
                         $resp[] = "The <span class=\"$fieldClass\">$field</span> field needs to be longer than $param character";
                     } else {
                         $resp[] = "The <span class=\"$fieldClass\">$field</span> field needs to be longer than $param characters";
@@ -473,7 +473,7 @@ class Gump
 
                 case 'validateExactLen':
 
-                    if($param == 1){
+                    if ($param == 1) {
                         $resp[] = "The <span class=\"$fieldClass\">$field</span> field needs to be exactly $param character in length";
                     } else {
                         $resp[] = "The <span class=\"$fieldClass\">$field</span> field needs to be exactly $param characters in length";
@@ -554,15 +554,15 @@ class Gump
             }
         }
 
-        if(!$convertToString){
+        if (!$convertToString) {
 
             return $resp;
 
-        }else{
+        } else {
 
             $buffer = '';
 
-            foreach($resp as $s){
+            foreach ($resp as $s) {
                 $buffer .= "<span class=\"$errorClass\">$s</span>";
             }
 
@@ -580,34 +580,34 @@ class Gump
      */
     public function filter(array $input, array $filterset)
     {
-        foreach($filterset as $field => $filters){
+        foreach ($filterset as $field => $filters) {
 
-            if(!array_key_exists($field, $input)){
+            if (!array_key_exists($field, $input)) {
                 continue;
             }
 
             $filters = explode('|', $filters);
 
-            foreach($filters as $filter){
+            foreach ($filters as $filter) {
                 $params = null;
 
-                if(strstr($filter, ',') !== false){
+                if (strstr($filter, ',') !== false) {
                     $filter = explode(',', $filter);
 
                     $params = array_slice($filter, 1, count($filter) - 1);
                     $filter = $filter[0];
                 }
 
-                if(is_callable([$this, 'filter'.$filter])){
+                if (is_callable([$this, 'filter'.$filter])) {
                     $method = 'filter'.$filter;
                     $input[$field] = $this->$method($input[$field], $params);
                 }
 
-                else if(function_exists($filter)){
+                elseif (function_exists($filter)) {
                     $input[$field] = $filter($input[$field]);
                 }
 
-                else if(isset(self::$filterMethods[$filter])){
+                elseif (isset(self::$filterMethods[$filter])) {
                     $input[$field] = call_user_func(self::$filterMethods[$filter], $input[$field], $params);
                 }
 
@@ -640,12 +640,12 @@ class Gump
 
         $words = explode(',', self::$enNoiseWords);
 
-        foreach($words as $word){
+        foreach ($words as $word) {
             $word = trim($word);
 
             $word = " $word "; // Normalize
 
-            if(stripos($value, $word) !== false){
+            if (stripos($value, $word) !== false) {
                 $value = str_ireplace($word, ' ', $value);
             }
         }
@@ -782,7 +782,7 @@ class Gump
      */
     protected function validateContains($field, $input, $param = null)
     {
-        if(!isset($input[$field])){
+        if (!isset($input[$field])) {
             return;
         }
 
@@ -790,13 +790,13 @@ class Gump
 
         $value = trim(strtolower($input[$field]));
 
-        if(preg_match_all('#\'(.+?)\'#', $param, $matches, PREG_PATTERN_ORDER)){
+        if (preg_match_all('#\'(.+?)\'#', $param, $matches, PREG_PATTERN_ORDER)) {
             $param = $matches[1];
-        }else{
+        } else {
             $param = explode(' ', $param);
         }
 
-        if(in_array($value, $param)){ // valid, return nothing
+        if (in_array($value, $param)) { // valid, return nothin g
             return;
         }
 
@@ -821,7 +821,7 @@ class Gump
      */
     protected function validateRequired($field, $input, $param = null)
     {
-        if(isset($input[$field]) && ($input[$field] === false || $input[$field] === 0 || $input[$field] === 0.0 || $input[$field] === "0" || !empty($input[$field]))){
+        if (isset($input[$field]) && ($input[$field] === false || $input[$field] === 0 || $input[$field] === 0.0 || $input[$field] === "0" || !empty($input[$field]))) {
                 return;
         }
 
@@ -846,11 +846,11 @@ class Gump
      */
     protected function validateValidEmail($field, $input, $param = null)
     {
-        if(!isset($input[$field]) || empty($input[$field])){
+        if (!isset($input[$field]) || empty($input[$field])) {
             return;
         }
 
-        if(!filter_var($input[$field], FILTER_VALIDATE_EMAIL)){
+        if (!filter_var($input[$field], FILTER_VALIDATE_EMAIL)) {
             return [
                 'field' => $field,
                 'value' => $input[$field],
@@ -873,17 +873,17 @@ class Gump
      */
     protected function validateMaxLen($field, $input, $param = null)
     {
-        if(!isset($input[$field])){
+        if (!isset($input[$field])) {
             return;
         }
 
-        if(function_exists('mb_strlen')){
-            if(mb_strlen($input[$field]) <= (int)$param){
+        if (function_exists('mb_strlen')) {
+            if (mb_strlen($input[$field]) <= (int)$param) {
                 return;
             }
         }
         else{
-            if(strlen($input[$field]) <= (int)$param){
+            if (strlen($input[$field]) <= (int)$param) {
                 return;
             }
         }
@@ -909,17 +909,17 @@ class Gump
      */
     protected function validateMinLen($field, $input, $param = null)
     {
-        if(!isset($input[$field])){
+        if (!isset($input[$field])) {
             return;
         }
 
-        if(function_exists('mb_strlen')){
-            if(mb_strlen($input[$field]) >= (int)$param){
+        if (function_exists('mb_strlen')) {
+            if (mb_strlen($input[$field]) >= (int)$param) {
                 return;
             }
         }
         else{
-            if(strlen($input[$field]) >= (int)$param){
+            if (strlen($input[$field]) >= (int)$param) {
                 return;
             }
         }
@@ -945,17 +945,17 @@ class Gump
      */
     protected function validateExactLen($field, $input, $param = null)
     {
-        if(!isset($input[$field])){
+        if (!isset($input[$field])) {
             return;
         }
 
-        if(function_exists('mb_strlen')){
-            if(mb_strlen($input[$field]) == (int)$param){
+        if (function_exists('mb_strlen')) {
+            if (mb_strlen($input[$field]) == (int)$param) {
                 return;
             }
         }
         else{
-            if(strlen($input[$field]) == (int)$param){
+            if (strlen($input[$field]) == (int)$param) {
                 return;
             }
         }
@@ -981,11 +981,11 @@ class Gump
      */
     protected function validateAlpha($field, $input, $param = null)
     {
-        if(!isset($input[$field]) || empty($input[$field])){
+        if (!isset($input[$field]) || empty($input[$field])) {
             return;
         }
 
-        if(!preg_match("/^([a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ])+$/i", $input[$field]) !== false){
+        if (!preg_match("/^([a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ])+$/i", $input[$field]) !== false) {
             return [
                 'field' => $field,
                 'value' => $input[$field],
@@ -1008,11 +1008,11 @@ class Gump
      */
     protected function validateAlphaNumeric($field, $input, $param = null)
     {
-        if(!isset($input[$field]) || empty($input[$field])){
+        if (!isset($input[$field]) || empty($input[$field])) {
             return;
         }
 
-        if(!preg_match("/^([a-z0-9ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ])+$/i", $input[$field]) !== false){
+        if (!preg_match("/^([a-z0-9ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ])+$/i", $input[$field]) !== false) {
             return [
                 'field' => $field,
                 'value' => $input[$field],
@@ -1035,11 +1035,11 @@ class Gump
      */
     protected function validateAlphaDash($field, $input, $param = null)
     {
-        if(!isset($input[$field]) || empty($input[$field])){
+        if (!isset($input[$field]) || empty($input[$field])) {
             return;
         }
 
-        if(!preg_match("/^([a-z0-9ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ_-])+$/i", $input[$field]) !== false){
+        if (!preg_match("/^([a-z0-9ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ_-])+$/i", $input[$field]) !== false) {
             return [
                 'field' => $field,
                 'value' => $input[$field],
@@ -1062,11 +1062,11 @@ class Gump
      */
     protected function validateNumeric($field, $input, $param = null)
     {
-        if(!isset($input[$field]) || empty($input[$field])){
+        if (!isset($input[$field]) || empty($input[$field])) {
             return;
         }
 
-        if(!is_numeric($input[$field])){
+        if (!is_numeric($input[$field])) {
             return [
                 'field' => $field,
                 'value' => $input[$field],
@@ -1089,11 +1089,11 @@ class Gump
      */
     protected function validateInteger($field, $input, $param = null)
     {
-        if(!isset($input[$field]) || empty($input[$field])){
+        if (!isset($input[$field]) || empty($input[$field])) {
             return;
         }
 
-        if(!filter_var($input[$field], FILTER_VALIDATE_INT)){
+        if (!filter_var($input[$field], FILTER_VALIDATE_INT)) {
             return [
                 'field' => $field,
                 'value' => $input[$field],
@@ -1116,13 +1116,13 @@ class Gump
      */
     protected function validateBoolean($field, $input, $param = null)
     {
-        if(!isset($input[$field]) || empty($input[$field])){
+        if (!isset($input[$field]) || empty($input[$field])) {
             return;
         }
 
         $bool = filter_var($input[$field], FILTER_VALIDATE_BOOLEAN);
 
-        if(!is_bool($bool)){
+        if (!is_bool($bool)) {
             return [
                 'field' => $field,
                 'value' => $input[$field],
@@ -1145,11 +1145,11 @@ class Gump
      */
     protected function validateFloat($field, $input, $param = null)
     {
-        if(!isset($input[$field]) || empty($input[$field])){
+        if (!isset($input[$field]) || empty($input[$field])) {
             return;
         }
 
-        if(!filter_var($input[$field], FILTER_VALIDATE_FLOAT)){
+        if (!filter_var($input[$field], FILTER_VALIDATE_FLOAT)) {
             return [
                 'field' => $field,
                 'value' => $input[$field],
@@ -1172,11 +1172,11 @@ class Gump
      */
     protected function validateValidUrl($field, $input, $param = null)
     {
-        if(!isset($input[$field]) || empty($input[$field])){
+        if (!isset($input[$field]) || empty($input[$field])) {
             return;
         }
 
-        if(!filter_var($input[$field], FILTER_VALIDATE_URL)){
+        if (!filter_var($input[$field], FILTER_VALIDATE_URL)) {
             return [
                 'field' => $field,
                 'value' => $input[$field],
@@ -1199,19 +1199,19 @@ class Gump
      */
     protected function validateUrlExists($field, $input, $param = null)
     {
-        if(!isset($input[$field]) || empty($input[$field])){
+        if (!isset($input[$field]) || empty($input[$field])) {
             return;
         }
 
         $url = parse_url(strtolower($input[$field]));
 
-        if(isset($url['host'])){
+        if (isset($url['host'])) {
             $url = $url['host'];
         }
 
-        if(function_exists('checkdnsrr'))
+        if (function_exists('checkdnsrr') )
         {
-            if(checkdnsrr($url) === false){
+            if (checkdnsrr($url) === false) {
                 return [
                     'field' => $field,
                     'value' => $input[$field],
@@ -1221,7 +1221,7 @@ class Gump
             }
         }
         else{
-            if(gethostbyname($url) == $url){
+            if (gethostbyname($url) == $url) {
                 return [
                     'field' => $field,
                     'value' => $input[$field],
@@ -1245,11 +1245,11 @@ class Gump
      */
     protected function validateValidIp($field, $input, $param = null)
     {
-        if(!isset($input[$field]) || empty($input[$field])){
+        if (!isset($input[$field]) || empty($input[$field])) {
             return;
         }
 
-        if(!filter_var($input[$field], FILTER_VALIDATE_IP) !== false){
+        if (!filter_var($input[$field], FILTER_VALIDATE_IP) !== false) {
             return [
                 'field' => $field,
                 'value' => $input[$field],
@@ -1276,11 +1276,11 @@ class Gump
      */
     protected function validateValidIpv4($field, $input, $param = null)
     {
-        if(!isset($input[$field]) || empty($input[$field])){
+        if (!isset($input[$field]) || empty($input[$field])) {
             return;
         }
 
-        if(!filter_var($input[$field], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)){
+        if (!filter_var($input[$field], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
             return [
                 'field' => $field,
                 'value' => $input[$field],
@@ -1303,11 +1303,11 @@ class Gump
      */
     protected function validateValidIpv6($field, $input, $param = null)
     {
-        if(!isset($input[$field]) || empty($input[$field])){
+        if (!isset($input[$field]) || empty($input[$field])) {
             return;
         }
 
-        if(!filter_var($input[$field], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)){
+        if (!filter_var($input[$field], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
             return [
                 'field' => $field,
                 'value' => $input[$field],
@@ -1331,13 +1331,13 @@ class Gump
      */
     protected function validateValidCc($field, $input, $param = null)
     {
-        if(!isset($input[$field]) || empty($input[$field])){
+        if (!isset($input[$field]) || empty($input[$field])) {
             return;
         }
 
         $number = preg_replace('/\D/', '', $input[$field]);
 
-        if(function_exists('mb_strlen')){
+        if (function_exists('mb_strlen')) {
             $number_length = mb_strlen($number);
         }
         else{
@@ -1348,13 +1348,13 @@ class Gump
 
         $total = 0;
 
-        for($i = 0; $i < $number_length; $i++){
+        for($i = 0; $i < $number_length; $i++) {
             $digit = $number[$i];
 
-            if($i % 2 == $parity){
+            if ($i % 2 == $parity) {
                 $digit *= 2;
 
-                if($digit > 9){
+                if ($digit > 9) {
                     $digit -= 9;
                 }
             }
@@ -1362,7 +1362,7 @@ class Gump
             $total += $digit;
         }
 
-        if($total % 10 == 0){
+        if ($total % 10 == 0) {
             return; // Valid
         }
 
@@ -1388,11 +1388,11 @@ class Gump
      */
     protected function validateValidName($field, $input, $param = null)
     {
-        if(!isset($input[$field])|| empty($input[$field])){
+        if (!isset($input[$field])|| empty($input[$field])) {
             return;
         }
 
-        if(!preg_match("/^([a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïñðòóôõöùúûüýÿ '-])+$/i", $input[$field]) !== false){
+        if (!preg_match("/^([a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïñðòóôõöùúûüýÿ '-])+$/i", $input[$field]) !== false) {
             return [
                 'field' => $field,
                 'value' => $input[$field],
@@ -1415,7 +1415,7 @@ class Gump
      */
     protected function validateStreetAddress($field, $input, $param = null)
     {
-        if(!isset($input[$field])|| empty($input[$field])){
+        if (!isset($input[$field])|| empty($input[$field])) {
             return;
         }
 
@@ -1426,7 +1426,7 @@ class Gump
 
         $passes = $hasLetter && $hasDigit && $hasSpace;
 
-        if(!$passes){
+        if (!$passes) {
             return [
                 'field' => $field,
                 'value' => $input[$field],
@@ -1449,7 +1449,7 @@ class Gump
      */
     protected function validateIban($field, $input, $param = null)
     {
-        if(!isset($input[$field]) || empty($input[$field])){
+        if (!isset($input[$field]) || empty($input[$field])) {
             return;
         }
 
@@ -1461,7 +1461,7 @@ class Gump
             'Z' => 35,
         ];
 
-        if(!preg_match("/\A[A-Z]{2}\d{2} ?[A-Z\d]{4}( ?\d{4}){1,} ?\d{1,4}\z/", $input[$field])){
+        if (!preg_match("/\A[A-Z]{2}\d{2} ?[A-Z\d]{4}( ?\d{4}) {1,} ?\d{1,4}\z/", $input[$field])) {
             return [
                 'field' => $field,
                 'value' => $input[$field],
@@ -1474,7 +1474,7 @@ class Gump
         $iban = substr($iban, 4) . substr($iban, 0, 4);
         $iban = strtr($iban, $character);
 
-        if(bcmod($iban, 97) != 1){
+        if (bcmod($iban, 97) != 1) {
             return [
                 'field' => $field,
                 'value' => $input[$field],
@@ -1498,7 +1498,7 @@ class Gump
      */
     protected function validateDate($field, $input, $param = null)
     {
-        if(!isset($input[$field]) || empty($input[$field])){
+        if (!isset($input[$field]) || empty($input[$field])) {
             return;
         }
 
@@ -1506,7 +1506,7 @@ class Gump
         $cdate2 = date('Y-m-d H:i:s', strtotime($input[$field]));
 
 
-        if($cdate1 != $input[$field] && $cdate2 != $input[$field]){
+        if ($cdate1 != $input[$field] && $cdate2 != $input[$field]) {
             return [
                 'field' => $field,
                 'value' => $input[$field],
@@ -1530,11 +1530,11 @@ class Gump
      */
     protected function validateMaxNumeric($field, $input, $param = null)
     {
-        if(!isset($input[$field]) || empty($input[$field])){
+        if (!isset($input[$field]) || empty($input[$field])) {
             return;
         }
 
-        if(is_numeric($input[$field]) && is_numeric($param) && ($input[$field] <= $param)){
+        if (is_numeric($input[$field]) && is_numeric($param) && ($input[$field] <= $param)) {
             return;
         }
 
@@ -1560,11 +1560,11 @@ class Gump
      */
     protected function validateMinNumeric($field, $input, $param = null)
     {
-        if(!isset($input[$field]) || empty($input[$field])){
+        if (!isset($input[$field]) || empty($input[$field])) {
             return;
         }
 
-        if(is_numeric($input[$field]) && is_numeric($param) && ($input[$field] >= $param)){
+        if (is_numeric($input[$field]) && is_numeric($param) && ($input[$field] >= $param)) {
             return;
         }
 
@@ -1584,7 +1584,7 @@ class Gump
      */
     private function trimScalar($value)
     {
-        if(is_scalar($value)){
+        if (is_scalar($value)) {
             $value = trim($value);
         }
 
