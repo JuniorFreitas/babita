@@ -3,7 +3,7 @@
  * @author Fábio Assunção - fabio@fabioassuncao.com.br
  * @version 1.0
  * @date February 06, 2016
- * @date update March 14, 2016
+ * @date updated March 14, 2016
  */
 
 /*
@@ -111,5 +111,4 @@ define('TIMEZONE', 'America/Sao_Paulo');
 /**
  * Set User agent
  */
-
 define('USER_AGENT', 'BABITA PHP Framework Agent');
