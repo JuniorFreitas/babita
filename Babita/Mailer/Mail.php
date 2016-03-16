@@ -1,12 +1,11 @@
 <?php
 /**
  * Mailer
- *---------------------------------------------------------------------------------------
- * @author Fábio Assunção da Silva - fabioassuncao.com
+ *
+ * @author Fábio Assunção da Silva - fabio@fabioassuncao.com.br
  * @version 1.0
  * @date Jul 31 2015
- * @date update February 06, 2016
- *---------------------------------------------------------------------------------------
+ * @date update March 23, 2016
  */
 
 namespace Babita\Mailer\PhpMailer;
@@ -23,32 +22,72 @@ class Mail extends PhpMailer
     {
         parent::__construct();
 
-        if(!isset($param['type']) OR isset($param['type']) && $param['type'] == 'smtp'){
+        if (!isset($param['type'])
+            || isset($param['type'])
+            && $param['type'] == 'smtp'
+        ) {
 
-            $smtpAuth       = (!isset($param['smtpAuth']))      ? MAIL_SMTP_AUTH    : $param['smtpAuth'];
-            $isHTML         = (!isset($param['isHTML']))        ? MAIL_IS_HTML      : $param['isHTML'];
-            $charset        = (!isset($param['charset']))       ? MAIL_CHARSET      : $param['charset'];
-            $smtpSecure     = (!isset($param['smtpSecure']))    ? MAIL_SMTP_SECURE  : $param['smtpSecure'];
-            $host           = (!isset($param['host']))          ? MAIL_HOST         : $param['host'];
-            $port           = (!isset($param['port']))          ? MAIL_PORT         : $param['port'];
-            $user           = (!isset($param['user']))          ? MAIL_USER         : $param['user'];
-            $pass           = (!isset($param['pass']))          ? MAIL_PASS         : $param['pass'];
+            $smtpAuth = (!isset($param['smtpAuth']))
+            ? MAIL_SMTP_AUTH
+            : $param['smtpAuth'];
+
+            $isHTML = (!isset($param['isHTML']))
+            ? MAIL_IS_HTML
+            : $param['isHTML'];
+
+            $charset = (!isset($param['charset']))
+            ? MAIL_CHARSET
+            : $param['charset'];
+
+            $smtpSecure = (!isset($param['smtpSecure']))
+            ? MAIL_SMTP_SECURE
+            : $param['smtpSecure'];
+
+            $host = (!isset($param['host']))
+            ? MAIL_HOST
+            : $param['host'];
+
+            $port = (!isset($param['port']))
+            ? MAIL_PORT
+            : $param['port'];
+
+            $user = (!isset($param['user']))
+            ? MAIL_USER
+            : $param['user'];
+
+            $pass = (!isset($param['pass']))
+            ? MAIL_PASS
+            : $param['pass'];
 
             //Making an SMTP connection with authentication.
 
-            $this->Mailer = 'smtp';             // Set mailer to use SMTP
-            $this->Host = $host;                // Specify main and backup SMTP servers
-            $this->SMTPAuth = $smtpAuth;        // Enable SMTP authentication
-            $this->Username = $user;            // SMTP username
-            $this->Password = $pass;            // SMTP password
-            $this->SMTPSecure = $smtpSecure;    // Enable TLS encryption, `ssl` also accepted
-            $this->Port = $port;                // TCP port to connect to
-            $this->isHTML($isHTML);             // Set email format to HTML
+            // Set mailer to use SMTP
+            $this->Mailer = 'smtp';
+
+            // Specify main and backup SMTP servers
+            $this->Host = $host;
+
+            // Enable SMTP authentication
+            $this->SMTPAuth = $smtpAuth;
+
+            // SMTP username
+            $this->Username = $user;
+
+             // SMTP password
+            $this->Password = $pass;
+
+            // Enable TLS encryption, `ssl` also accepted
+            $this->SMTPSecure = $smtpSecure;
+
+            // TCP port to connect to
+            $this->Port = $port;
+
+            // Set email format to HTML
+            $this->isHTML($isHTML);
+
             $this->CharSet = $charset;
 
-        }
-
-        else if(isset($param['type']) && $param['type'] == 'sendmail'){
+        } elseif (isset($param['type']) && $param['type'] == 'sendmail') {
             /**
              * Which method to use to send mail.
              * Sending a message using a local sendmail binary.
@@ -56,9 +95,11 @@ class Mail extends PhpMailer
              * @type string
              */
             $this->Mailer = 'sendmail';
-        }
 
-        else if(isset($param['type']) && $param['type'] == 'mail' OR $param['type'] == 'php'){
+        } elseif (isset($param['type'])
+                && $param['type'] == 'mail'
+                || $param['type'] == 'php'
+            ) {
             /**
              * Which method to use to send mail.
              * Send messages using PHP's mail() function.
@@ -106,7 +147,6 @@ class Mail extends PhpMailer
      * The Subject of the message.
      * @type string
      */
-
     public function subject($subject)
     {
         $this->Subject = $subject;
@@ -123,24 +163,21 @@ class Mail extends PhpMailer
      *  Example 2: $from = 'fabio@fabioassuncao.com.br, Fábio Silva';
      *
      */
-
     public function from($from, $replyto = true)
     {
 
-        if($replyto === true){
+        if ($replyto === true) {
             $this->replyTo($from);
         }
 
-        if(is_string($from) && strpos($from, ',')){
+        if (is_string($from) && strpos($from, ',')) {
             list($mail, $name) = explode(',', $from);
             $this->SetFrom($mail, $name);
-
             return;
         }
 
-        else if(is_array($from) && isset($from['mail']) && isset($from['name'])){
+        elseif (is_array($from) && isset($from['mail']) && isset($from['name'])) {
             $this->SetFrom($from['mail'], $from['name']);
-
             return;
         }
 
@@ -166,7 +203,6 @@ class Mail extends PhpMailer
      *  Example 4: $replyTo = 'fabio@fabioassuncao.com.br, Fábio Silva';
      *
      */
-
     public function replyTo($replyTo)
     {
         $this->address('Reply-To', $replyTo);
@@ -192,7 +228,6 @@ class Mail extends PhpMailer
      *
      *  Example 4: $replyTo = 'fabio@fabioassuncao.com.br, Fábio Silva';
      */
-
     public function cc($cc)
     {
         $this->address('cc', $cc);
@@ -203,8 +238,7 @@ class Mail extends PhpMailer
      * If HTML then call isHTML(true).
      * @type string
      */
-
-    public function body($body){
+    public function body($body) {
         $this->Body = $body;
         $this->AltBody = 'If this email does not appear correctly, enable viewing of HTML messages.';
     }
@@ -229,7 +263,6 @@ class Mail extends PhpMailer
      *  Example 4: $destination = 'fabio@fabioassuncao.com.br, Fábio Silva';
      *
      */
-
     public function destination($destination, $send = false)
     {
         return $this->address('to', $destination, $send);
@@ -249,7 +282,6 @@ class Mail extends PhpMailer
      *  ];
      *
      */
-
     public function mailingList($mailingList)
     {
         return $this->address('to', $mailingList, true);
@@ -257,18 +289,18 @@ class Mail extends PhpMailer
 
     private function address($kind, $data, $send = false)
     {
-        if($send === true){
+        if ($send === true) {
             // SMTP connection will not close after each email sent, reduces SMTP overhead
             // Deixa em aberto a conexão com servidor
             $this->SMTPKeepAlive = true;
         }
 
-        if(is_string($data) && strpos($data, ',')){
+        if (is_string($data) && strpos($data, ',')) {
 
             list($mail, $name) = explode(',', $data);
             $this->addAnAddress($kind, $mail, $name);
 
-            if($send === true){
+            if ($send === true) {
                 $result = $this->go(true);
                 $this->setLog($mail, $result);
             }
@@ -276,36 +308,34 @@ class Mail extends PhpMailer
             return $this->log;
         }
 
-        if(is_array($data) && isset($data['mail']) && isset($data['name'])){
+        if (is_array($data) && isset($data['mail']) && isset($data['name'])) {
             $this->addAnAddress($kind, $data['mail'], $data['name']);
 
-            if($send === true){
+            if ($send === true) {
                 $result = $this->go(true);
                 $this->setLog($data['mail'], $result);
             }
 
             return $this->log;
-        }
 
-        else if(is_array($data)){
+        } elseif (is_array($data)) {
 
-            foreach($data as $d){
+            foreach ($data as $d) {
 
-                if(is_array($d) && isset($d['mail']) && isset($d['name'])){
+                if (is_array($d) && isset($d['mail']) && isset($d['name'])) {
                     $this->addAnAddress($kind, $d['mail'], $d['name']);
 
-                    if($send){
+                    if ($send) {
                         $result = $this->go(true);
                         $this->setLog($d['mail'], $result);
                     }
-                }
 
-                else if(is_string($d) && strpos($d, ',')){
+                } elseif (is_string($d) && strpos($d, ',')) {
 
                     $d = explode(',', $d);
                     $this->addAnAddress($kind, $d[0], $d[1]);
 
-                    if($send){
+                    if ($send) {
                         $result = $this->go(true);
                         $this->setLog($d[0], $result);
                     }
@@ -341,31 +371,27 @@ class Mail extends PhpMailer
      *  Example 4: $attachment = 'uploads/sample.png, sample.png';
      *
      */
-
     public function attachment($attachment)
     {
-        if(is_string($attachment) && strpos($attachment, ',')){
+        if (is_string($attachment) && strpos($attachment, ',')) {
             $a = explode(',', $attachment);
             $this->AddAttachment($a[0], $a[1]);
 
             return;
         }
 
-        if(is_array($attachment) && isset($attachment['path']) && isset($attachment['name'])){
+        if (is_array($attachment) && isset($attachment['path']) && isset($attachment['name'])) {
             $this->AddAttachment($attachment['path'], $attachment['name']);
-
             return;
-        }
 
-        else if(is_array($attachment)){
+        } elseif (is_array($attachment)) {
 
-            foreach($attachment as $a){
+            foreach ($attachment as $a) {
 
-                if(is_array($a) && isset($a['path']) && isset($a['name'])){
+                if (is_array($a) && isset($a['path']) && isset($a['name'])) {
                     $this->AddAttachment($a['path'], $a['name']);
-                }
 
-                else if(is_string($a) && strpos($a, ',')){
+                } elseif (is_string($a) && strpos($a, ',')) {
 
                     $a = explode(',', $a);
                     $this->AddAttachment($a[0], $a[1]);
@@ -388,7 +414,7 @@ class Mail extends PhpMailer
 
         $send = $this->Send();
 
-        if($send === false){
+        if ($send === false) {
 
             return [
                 "message" => "Error sending mail",
@@ -397,17 +423,14 @@ class Mail extends PhpMailer
                 "date" => date('Y-m-d H:i:s')
             ];
 
-        }
-        else{
+        } else {
 
             // se enviado com sucesso, limpa recipientes e anexos;
             // Clear all addresses and attachments for next loop
 
-            if($mailingList === false){
+            if ($mailingList === false) {
                 $this->clearAllRecipients();
-            }
-
-            else{
+            } else {
                 $this->clearAddresses();
             }
 
