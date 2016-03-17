@@ -11,6 +11,7 @@
  * @author Fábio Assunção da Silva - fabioassuncao.com
  * @version 1.0
  * @date February 06, 2016
+ * @date updated March 17, 2016
  *---------------------------------------------------------------------------------------
  */
 
@@ -119,7 +120,7 @@ class View
      *
      * @param array $headers
      */
-    public function addHeaders(array $headers = array())
+    public function addHeaders(array $headers = [])
     {
         self::$headers = array_merge(self::$headers, $headers);
     }

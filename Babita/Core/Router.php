@@ -63,7 +63,7 @@ class Router
      *
      * @var null $errorCallback
      */
-    public $errorCallback;
+    public $errorCallback = 'Babita\Core\Error@index';
 
     /** Set route patterns */
     public $patterns = array(
@@ -127,9 +127,14 @@ class Router
         $controller = $segments[0];
         $method = $segments[1];
 
-        $controller = new $controller($msg);
+        $controller = $msg
+        ? new $controller($msg)
+        : new $controller();
 
-        call_user_func_array(array($controller, $method), $matched ? $matched : []);
+        call_user_func_array(
+            array($controller, $method),
+            $matched ? $matched : []
+        );
     }
 
     /**
@@ -141,9 +146,9 @@ class Router
     {
         $uri = parse_url($_SERVER['QUERY_STRING'], PHP_URL_PATH);
         $uri = '/'.$uri;
-		if (strpos($uri,DIR) === 0) {
-			$uri=substr($uri,strlen(DIR));
-		}
+        if (strpos($uri,DIR) === 0) {
+            $uri=substr($uri,strlen(DIR));
+        }
         $uri = trim($uri, ' /');
         $uri = ($amp = strpos($uri, '&')) !== false ? substr($uri, 0, $amp) : $uri;
 
@@ -167,7 +172,7 @@ class Router
         $c = new $controller;
 
         if (method_exists($c, $method)) {
-			call_user_func_array(array($c,$method),$args);
+            call_user_func_array(array($c,$method),$args);
             //found method so stop
             return true;
         }
@@ -249,7 +254,10 @@ class Router
                 }
 
                 if (preg_match('#^' . $route . '$#', $uri, $matched)) {
-                    if ($this->methods[$pos] == $method || $this->methods[$pos] == 'ANY') {
+                    if (
+                        $this->methods[$pos] == $method
+                        || $this->methods[$pos] == 'ANY'
+                    ) {
                         $found_route = true;
 
                         //remove $matched[0] as [1] is the first parameter.
@@ -282,22 +290,10 @@ class Router
 
         // run the error callback if the route was not found
         if (!$found_route) {
-            if (!$this->errorCallback) {
-                $this->errorCallback = function () {
-                    header("{$_SERVER['SERVER_PROTOCOL']} 404 Not Found");
-
-                    $data['title'] = '404';
-                    $data['error'] = "Oops! Page not found..";
-
-                    View::renderTemplate('header', $data);
-                    View::render('error/404', $data);
-                    View::renderTemplate('footer', $data);
-                };
-            }
 
             if (!is_object($this->errorCallback)) {
                 //call object controller and method
-                $this->invokeObject($this->errorCallback, null, 'No routes found.');
+                $this->invokeObject($this->errorCallback);
                 if ($this->halts) {
                     return;
                 }
