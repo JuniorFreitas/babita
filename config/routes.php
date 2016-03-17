@@ -5,6 +5,7 @@
  * @author Fábio Assunção - fabio@fabioassuncao.com.br
  * @version 1.0
  * @date February 06, 2016
+ * @date updated March 17, 2016
  */
 
 /** Create alias for Router. */
@@ -13,19 +14,19 @@ use Babita\Helpers\Hooks;
 
 $router = new Router();
 
-/** Define routes. */
+/* Define routes. */
 $router->any('/', 'Controllers\Welcome@index');
 $router->any('/subpage', 'Controllers\Welcome@subPage');
 
-/** Module routes. */
+/* Module routes. */
 $hooks = Hooks::get();
 $hooks->run('routes');
 
-/** If no route found. */
-$router->error('Babita\Core\Error@index');
+/* If no route found. */
+$router->error('Controllers\Error@index');
 
-/** Turn on old style routing. */
+/* Turn on old style routing. */
 $router->fallback = false;
 
-/** Execute matched routes. */
+/* Execute matched routes. */
 $router->dispatch();

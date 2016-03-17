@@ -26,7 +26,7 @@ class Database extends PDO
     /**
      * @var array Array of saved databases for reusing
      */
-    protected static $instances = array();
+    protected static $instances = [];
 
     /**
      * Static method get
@@ -37,14 +37,16 @@ class Database extends PDO
     public static function get($group = false)
     {
         // Determining if exists or it's not empty, then use default group defined in config
-        $group = !$group ? array (
+        $group = !$group
+        ? [
             'type' => DB_TYPE,
             'host' => DB_HOST,
             'name' => DB_NAME,
             'user' => DB_USER,
             'pass' => DB_PASS,
             'port' => DB_PORT
-        ) : $group;
+        ]
+        : $group;
 
         // Group information
         $type = $group['type'];
@@ -98,7 +100,7 @@ class Database extends PDO
      * @param  string $class     class name
      * @return array            returns an array of records
      */
-    public function select($sql, $array = array(), $fetchMode = PDO::FETCH_OBJ, $class = '')
+    public function select($sql, $array = [], $fetchMode = PDO::FETCH_OBJ, $class = '')
     {
         $stmt = $this->prepare($sql);
         foreach ($array as $key => $value) {

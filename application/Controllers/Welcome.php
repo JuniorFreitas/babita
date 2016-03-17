@@ -1,6 +1,6 @@
 <?php
 /**
- * Welcome controller
+ * Example Welcome controller
  *
  * @author David Carr - dave@daveismyname.com
  * @version 2.2
@@ -38,13 +38,12 @@ class Welcome extends Controller
      */
     public function index()
     {
-
         $data['title'] = _t('welcome_text');
         $data['welcome_message'] = _t('welcome_message');
 
-        View::renderTemplate('header', $data);
-        View::render('welcome/welcome', $data);
-        View::renderTemplate('footer', $data);
+        $this->view->renderTemplate('header', $data);
+        $this->view->render('welcome/welcome', $data);
+        $this->view->renderTemplate('footer', $data);
     }
 
     /**
@@ -55,8 +54,8 @@ class Welcome extends Controller
         $data['title'] = _t('subpage_text');
         $data['welcome_message'] = _t('subpage_message');
 
-        View::renderTemplate('header', $data);
-        View::render('welcome/subpage', $data);
-        View::renderTemplate('footer', $data);
+        $this->view->renderTemplate('header', $data);
+        $this->view->render('welcome/subpage', $data);
+        $this->view->renderTemplate('footer', $data);
     }
 }
