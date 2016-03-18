@@ -53,7 +53,6 @@ if (file_exists(BABITA .'vendor'.DS.'autoload.php')) {
  * Different environments will require different levels of error reporting.
  * By default development will show errors but production will hide them.
  */
-
 if (defined('ENVIRONMENT')) {
     switch (ENVIRONMENT) {
         case 'development':
