@@ -42,8 +42,9 @@ class View
             extract($data);
         }
 
-        require ($customPath) ? "$path.php" : BABITA.DS.VIEWS_PATH.DS."$path.php";
-
+        require($customPath)
+        ?  BABITA.DS."$path.php"
+        : BABITA.DS.VIEWS_PATH.DS."$path.php";
     }
 
     /**
@@ -59,7 +60,9 @@ class View
             extract($data);
         }
 
-        $path = ($customPath) ? "$path.php" : BABITA.DS.VIEWS_PATH.DS."$path.php";
+        $path = ($customPath)
+        ?  BABITA.DS."$path.php"
+        : BABITA.DS.VIEWS_PATH.DS."$path.php";
 
         if (is_readable($path)) {
             ob_start();
@@ -85,7 +88,9 @@ class View
             extract($data);
         }
 
-        require ($customPath) ? "$path.php" : BABITA.DS.TEMPLATES_PATH.DS."$path.php";
+        require ($customPath)
+        ?  BABITA.DS."$path.php"
+        : BABITA.DS.TEMPLATES_PATH.DS."$custom/$path.php";
     }
 
     /**
