@@ -7,7 +7,7 @@
  * BABITA SMVC specifed directory default is '.'
  * If app folder is not in the same directory update it's path
  */
-$babita = '.';
+$babita = '../';
 
 define('DS', DIRECTORY_SEPARATOR);
 
@@ -28,10 +28,11 @@ unset($babita);
 $filesConfig = include_once "configs.php";
 
 foreach ($filesConfig as $file) {
-    if (file_exists(BABITA.'config'.DS.$file)) {
-        require (BABITA.'config'.DS.$file);
+    $filePath = BABITA.'config'.DS.$file;
+    if (file_exists($filePath)) {
+        require ($filePath);
     }else{
-        throw new \Exception("No {$file} found, configure {$file} in config folder.");
+        throw new \Exception("No {$file} found, configure {$file} in config folder ({$filePath}).");
     }
 }
 
