@@ -16,22 +16,22 @@ define('DB_TYPE', 'mysql');
 /**
  * Database host default is localhost.
  */
-define('DB_HOST', 'localhost');
+define('DB_HOST', '<host>');
 
 /**
  * Database name.
  */
-define('DB_NAME', 'dbname');
+define('DB_NAME', '<dbname>');
 
 /**
  * Database username.
  */
-define('DB_USER', 'root');
+define('DB_USER', '<user>');
 
 /**
  * Database password.
  */
-define('DB_PASS', 'password');
+define('DB_PASS', '<password>');
 
 /**
  * Database port.
