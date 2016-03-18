@@ -1,17 +1,11 @@
 <?php
 /**
- * Model - the base model
+ * The base Model
  *
- * @author David Carr - dave@daveismyname.com
- * @version 2.2
- * @date June 27, 2014
- * @date updated Sept 19, 2015
- *---------------------------------------------------------------------------------------
- * Modified from SMVC 2.2 - https://github.com/simple-mvc-framework/framework.git
  * @author Fábio Assunção da Silva - fabioassuncao.com
  * @version 1.0
  * @date February 06, 2016
- *---------------------------------------------------------------------------------------
+ * @date updated March 18, 2016
  */
 
 namespace Babita\Mvc;
@@ -24,18 +18,18 @@ use Babita\Database\Database;
 abstract class Model
 {
     /**
-     * Hold the database connection.
+     * Object with methods to access the database
      *
      * @var object
      */
     protected $db;
 
-    /**
-     * Create a new instance of the database helper.
-     */
+
     public function __construct()
     {
-        /** connect to PDO here. */
+        /**
+         * Create a new instance of the database componet.
+         */
         $this->db = Database::get();
     }
 }

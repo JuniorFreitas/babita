@@ -1,25 +1,20 @@
 <?php
 /**
- * View - load template pages
+ * View
+ * Class to load template and views files
  *
  * @author David Carr - dave@daveismyname.com
- * @version 2.2
- * @date June 27, 2014
- * @date updated Sept 19, 2015
  *---------------------------------------------------------------------------------------
  * Modified from SMVC 2.2 - https://github.com/simple-mvc-framework/framework.git
  * @author Fábio Assunção da Silva - fabioassuncao.com
  * @version 1.0
  * @date February 06, 2016
- * @date updated March 17, 2016
+ * @date updated March 18, 2016
  *---------------------------------------------------------------------------------------
  */
 
 namespace Babita\Mvc;
 
-/**
- * View class to load template and views files.
- */
 class View
 {
     /**
@@ -43,7 +38,7 @@ class View
         }
 
         require($customPath)
-        ?  BABITA.DS."$path.php"
+        ? BABITA.DS."$path.php"
         : BABITA.DS.VIEWS_PATH.DS."$path.php";
     }
 
@@ -61,7 +56,7 @@ class View
         }
 
         $path = ($customPath)
-        ?  BABITA.DS."$path.php"
+        ? BABITA.DS."$path.php"
         : BABITA.DS.VIEWS_PATH.DS."$path.php";
 
         if (is_readable($path)) {
@@ -89,7 +84,7 @@ class View
         }
 
         require ($customPath)
-        ?  BABITA.DS."$path.php"
+        ? BABITA.DS."$path.php"
         : BABITA.DS.TEMPLATES_PATH.DS."$custom/$path.php";
     }
 

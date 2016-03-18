@@ -1,17 +1,11 @@
 <?php
 /**
- * Controller - base controller
+ * Base Controller
  *
- * @author David Carr - dave@daveismyname.com
- * @version 2.2
- * @date June 27, 2014
- * @date updated Sept 19, 2015
- *---------------------------------------------------------------------------------------
- * Modified from SMVC 2.2 - https://github.com/simple-mvc-framework/framework.git
  * @author Fábio Assunção da Silva - fabioassuncao.com
  * @version 1.0
  * @date February 06, 2016
- *---------------------------------------------------------------------------------------
+ * @date updated March 18, 2016
  */
 
 namespace Babita\Mvc;
@@ -27,16 +21,16 @@ abstract class Controller
     /**
      * View variable to use the view class.
      *
-     * @var string
+     * @var object
      */
     public $view;
 
     /**
      * I18n variable to use the languages class.
      *
-     * @var string
+     * @var object
      */
-    public $language;
+    public $lang;
 
     /**
      * On run make an instance of the config class and view class.
