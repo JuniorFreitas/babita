@@ -16,8 +16,8 @@
 
 namespace Babita\Core;
 
-use Babita\Core\Controller;
-use Babita\Core\View;
+use Babita\Mvc\Controller;
+use Babita\Mvc\View;
 
 /**
  * Error class to generate 404 pages.

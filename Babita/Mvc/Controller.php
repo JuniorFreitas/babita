@@ -14,9 +14,9 @@
  *---------------------------------------------------------------------------------------
  */
 
-namespace Babita\Controller;
+namespace Babita\Mvc;
 
-use Babita\View\View;
+use Babita\Mvc\View;
 use Babita\Core\I18n;
 
 /**

@@ -16,8 +16,7 @@
 
 namespace Controllers;
 
-use Babita\Core\View;
-use Babita\Core\Controller;
+use Babita\Mvc\Controller;
 
 /**
  * Sample controller showing a construct and 2 methods and their typical usage.

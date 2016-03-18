@@ -14,7 +14,7 @@
  *---------------------------------------------------------------------------------------
  */
 
-namespace Babita\Model;
+namespace Babita\Mvc;
 
 use Babita\Database\Database;
 

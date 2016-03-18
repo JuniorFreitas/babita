@@ -15,7 +15,7 @@
  *---------------------------------------------------------------------------------------
  */
 
-namespace Babita\View;
+namespace Babita\Mvc;
 
 /**
  * View class to load template and views files.

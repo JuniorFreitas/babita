@@ -16,7 +16,7 @@
 
 namespace Babita\Core;
 
-use Babita\Core\View;
+use Babita\Mvc\View;
 use Babita\Mailer\Mail;
 
 /**
