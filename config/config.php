@@ -27,7 +27,7 @@ define('ENVIRONMENT', 'development');
  * Define relative base path.
  */
 
-define('DIR', 'http://localhost/Contributing/babita/');
+define('DIR', '/');
 
 /**
  * System path
@@ -96,8 +96,10 @@ define('LANGUAGE_CODE', 'pt_BR');
 
 /**
  * Set private key for encryption and decryption.
+ * The key length must be at least 256bit / 32 characters
+ * Exemple: a9e83e7d2b4638ff200ba1a2b925c424e623420a
  */
-define('APP_KEY', 'a9e83e7d2b4638ff200ba1a2b925c424e623420a');
+define('APP_KEY', '<YOUR KEY HERE>');
 
 /**
  * Optional create a constant for the name of the site.
