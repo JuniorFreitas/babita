@@ -34,7 +34,7 @@ class View
      * @param  array  $data  array of data
      * @param  array  $error array of errors
      */
-    public static function render($path, $data = false, $error = false)
+    public static function render($path, $data = false, $error = false, $customPath = false)
     {
         self::sendHeaders();
 
@@ -42,7 +42,8 @@ class View
             extract($data);
         }
 
-        require BABITA.DS.VIEWS_PATH.DS."$path.php";
+        require ($customPath) ? "$path.php" : BABITA.DS.VIEWS_PATH.DS."$path.php";
+
     }
 
     /**
@@ -52,13 +53,13 @@ class View
      * @param  array  $data  array of data
      * @param  array  $error array of errors
      */
-    public static function get($path, $data = false, $error = false) {
+    public static function get($path, $data = false, $error = false, $customPath = false) {
 
         if($data){
             extract($data);
         }
 
-        $path = BABITA.DS.VIEWS_PATH.DS."$path.php";
+        $path = ($customPath) ? "$path.php" : BABITA.DS.VIEWS_PATH.DS."$path.php";
 
         if (is_readable($path)) {
             ob_start();
@@ -67,6 +68,24 @@ class View
         }
 
         return false;
+    }
+
+    /**
+     * Return absolute path to selected template directory.
+     *
+     * @param  string  $path  path to file from views folder
+     * @param  array   $data  array of data
+     * @param  string  $custom path to template folder
+     */
+    public static function renderTemplate($path, $data = false, $custom = TEMPLATE, $customPath = false)
+    {
+        self::sendHeaders();
+
+        if($data){
+            extract($data);
+        }
+
+        require ($customPath) ? "$path.php" : BABITA.DS.TEMPLATES_PATH.DS."$path.php";
     }
 
     /**
@@ -85,24 +104,6 @@ class View
         }
 
         require BABITA.DS.MODULES_PATH.DS."$path.php";
-    }
-
-    /**
-     * Return absolute path to selected template directory.
-     *
-     * @param  string  $path  path to file from views folder
-     * @param  array   $data  array of data
-     * @param  string  $custom path to template folder
-     */
-    public static function renderTemplate($path, $data = false, $custom = TEMPLATE)
-    {
-        self::sendHeaders();
-
-        if($data){
-            extract($data);
-        }
-
-        require BABITA.DS.TEMPLATES_PATH.DS."$custom/$path.php";
     }
 
     /**
