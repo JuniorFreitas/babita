@@ -15,7 +15,7 @@
  *---------------------------------------------------------------------------------------
  */
 
-namespace Babita\Core;
+namespace Babita\View;
 
 /**
  * View class to load template and views files.
