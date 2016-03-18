@@ -47,6 +47,6 @@ abstract class Controller
         $this->view = new View;
 
         /** initialise the language object */
-        $this->language = new I18n;
+        $this->lang = new I18n;
     }
 }
