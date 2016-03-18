@@ -16,8 +16,6 @@
 
 namespace Babita\Core;
 
-use Babita\Core\View;
-
 /**
  * Router class will load requested controller / closure based on url.
  */

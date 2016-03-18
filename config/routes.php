@@ -1,6 +1,8 @@
 <?php
 /**
- * Routes - all standard routes are defined here.
+ * Routes
+ *
+ * All standard routes are defined here.
  *
  * @author Fábio Assunção - fabio@fabioassuncao.com.br
  * @version 1.0
@@ -8,7 +10,7 @@
  * @date updated March 17, 2016
  */
 
-/** Create alias for Router. */
+/* Create alias for Router. */
 use Babita\Core\Router;
 use Babita\Helpers\Hooks;
 

@@ -14,9 +14,9 @@
  *---------------------------------------------------------------------------------------
  */
 
-namespace Babita\Core;
+namespace Babita\Mvc;
 
-use Babita\Helpers\Database;
+use Babita\Database\Database;
 
 /**
  * Base model class all other models will extend from this base.
