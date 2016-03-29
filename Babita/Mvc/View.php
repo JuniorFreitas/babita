@@ -33,8 +33,10 @@ class View
     {
         self::sendHeaders();
 
-        if($data){
-            extract($data);
+        if ($data) {
+            foreach ($data as $name => $value) {
+                ${$name} = $value;
+            }
         }
 
         require($customPath)
@@ -51,8 +53,10 @@ class View
      */
     public static function get($path, $data = false, $error = false, $customPath = false) {
 
-        if($data){
-            extract($data);
+        if ($data) {
+            foreach ($data as $name => $value) {
+                ${$name} = $value;
+            }
         }
 
         $path = ($customPath)
@@ -79,8 +83,10 @@ class View
     {
         self::sendHeaders();
 
-        if($data){
-            extract($data);
+        if ($data) {
+            foreach ($data as $name => $value) {
+                ${$name} = $value;
+            }
         }
 
         require ($customPath)
@@ -99,8 +105,10 @@ class View
     {
         self::sendHeaders();
 
-        if($data){
-            extract($data);
+        if ($data) {
+            foreach ($data as $name => $value) {
+                ${$name} = $value;
+            }
         }
 
         require BABITA.DS.MODULES_PATH.DS."$path.php";
