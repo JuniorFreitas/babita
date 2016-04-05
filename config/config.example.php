@@ -52,12 +52,12 @@ define('MODELS_PATH', 'application/Models');
 /**
  * Views path
  */
-define('VIEWS_PATH', 'application/Views');
+define('VIEWS_PATH', 'application/views');
 
 /**
  * Templates path
  */
-define('TEMPLATES_PATH', 'application/Templates');
+define('TEMPLATES_PATH', 'application/templates');
 
 /**
  * Controllers path
