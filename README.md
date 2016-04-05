@@ -1,6 +1,6 @@
 ![logo.png](public/assets/img/framework/logo.png "Babita PHP Framework")
 
-# Version 1.0.0 beta
+# Release 0.0.1
 
 ## What is Babita Framework?
 
