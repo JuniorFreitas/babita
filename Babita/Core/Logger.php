@@ -48,17 +48,12 @@ class Logger
     /**
     * Path to error file.
     *
-    * @var string
+    * @return string
     */
-    public static $errorFile;
-
-    /**
-    * Construct
-    */
-    public function __construct()
+    private static function errorFile()
     {
         $today = date('Y-m-d');
-        self::$errorFile = ERRORS_PATH . DS . "error-{$today}.html";
+        return "error-{$today}.html";
     }
 
     /**
@@ -134,19 +129,19 @@ class Logger
            <pre>{$trace}</pre>\n
            <hr />\n";
 
-        if (is_file(self::$errorFile) === false) {
-            file_put_contents(self::$errorFile, '');
+        if (is_file(self::errorFile()) === false) {
+            file_put_contents(self::errorFile(), '');
         }
 
         if (self::$clear) {
-            $f = fopen(self::$errorFile, "r+");
+            $f = fopen(self::errorFile(), "r+");
             if ($f !== false) {
                 ftruncate($f, 0);
                 fclose($f);
             }
         }
 
-        file_put_contents(self::$errorFile, $logMessage, FILE_APPEND);
+        file_put_contents(self::errorFile(), $logMessage, FILE_APPEND);
 
         //send email
         self::sendEmail($logMessage);
@@ -169,18 +164,18 @@ class Logger
         $date = date('Y-m-d H:i:s');
         $logMessage = "<p>Error on $date - $error</p>";
 
-        if (is_file(self::$errorFile) === false) {
-            file_put_contents(self::$errorFile, '');
+        if (is_file(self::errorFile()) === false) {
+            file_put_contents(self::errorFile(), '');
         }
 
         if (self::$clear) {
-            $f = fopen(self::$errorFile, "r+");
+            $f = fopen(self::errorFile(), "r+");
             if ($f !== false) {
                 ftruncate($f, 0);
                 fclose($f);
             }
         } else {
-            file_put_contents(self::$errorFile, $logMessage, FILE_APPEND);
+            file_put_contents(self::errorFile(), $logMessage, FILE_APPEND);
         }
 
         /** send email */
