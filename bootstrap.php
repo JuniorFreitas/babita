@@ -31,7 +31,13 @@ define('CONFIGDIR', BABITA.'config'.DS);
 /**
  * Load configs files
  */
-$filesConfig = include_once "configs.php";
+$filesConfig = [
+    'config.php',
+    'session.php',
+    'database.php',
+    'email.php'
+];
+
 foreach ($filesConfig as $file) {
     $filePath = CONFIGDIR.$file;
     if (file_exists($filePath)) {
