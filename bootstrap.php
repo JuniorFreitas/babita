@@ -26,18 +26,18 @@ define('BABITA', ROOT);
 /**
  * Set settings directory
  */
-define('CONFIG', BABITA.'config'.DS);
+define('CONFIGDIR', BABITA.'config'.DS);
 
 /**
  * Load configs files
  */
 $filesConfig = include_once "configs.php";
 foreach ($filesConfig as $file) {
-    $filePath = CONFIG.$file;
+    $filePath = CONFIGDIR.$file;
     if (file_exists($filePath)) {
         require ($filePath);
     }else{
-        die("{$file} not found. Create {$file} in ".CONFIG);
+        die("{$file} not found. Create {$file} in ".CONFIGDIR);
     }
 }
 
@@ -47,7 +47,7 @@ foreach ($filesConfig as $file) {
 if (file_exists(BABITA .'vendor'.DS.'autoload.php')) {
     require (BABITA.'vendor'.DS.'autoload.php');
 } else {
-    throw new \Exception('Please install via composer.json');
+    die('Please install via composer.json');
 }
 
 /*
