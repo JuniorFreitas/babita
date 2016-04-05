@@ -133,6 +133,7 @@ class Database extends PDO
     public function insert($table, $data)
     {
         ksort($data);
+        $table = DB_PREFIX.$table;
 
         $fieldNames = implode(',', array_keys($data));
         $fieldValues = ':'.implode(', :', array_keys($data));
@@ -156,6 +157,7 @@ class Database extends PDO
     public function update($table, $data, $where)
     {
         ksort($data);
+        $table = DB_PREFIX.$table;
 
         $fieldDetails = null;
         foreach ($data as $key => $value) {
@@ -199,6 +201,7 @@ class Database extends PDO
     public function delete($table, $where, $limit = 1)
     {
         ksort($where);
+        $table = DB_PREFIX.$table;
 
         $whereDetails = null;
         $i = 0;
