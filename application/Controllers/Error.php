@@ -3,7 +3,7 @@
  * Example error controller
  *
  * @author Fábio Assunção da Silva - fabioassuncao.com
- * @version 1.0
+ * @version 0.0.1
  * @date March 17, 2016
  *---------------------------------------------------------------------------------------
  */

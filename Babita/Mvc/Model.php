@@ -3,7 +3,7 @@
  * The base Model
  *
  * @author Fábio Assunção da Silva - fabioassuncao.com
- * @version 1.0
+ * @version 0.0.1
  * @date February 06, 2016
  * @date updated March 18, 2016
  */

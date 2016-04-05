@@ -5,7 +5,7 @@
  * All standard routes are defined here.
  *
  * @author Fábio Assunção - fabio@fabioassuncao.com.br
- * @version 1.0
+ * @version 0.0.1
  * @date February 06, 2016
  * @date updated March 17, 2016
  */

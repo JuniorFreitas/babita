@@ -3,13 +3,13 @@
  * FTP Class
  *
  * @author David Carr - dave@daveismyname.com
- * @version 1.0
+ * @version 0.0.1
  * @date June 27, 2014
  * @date updated Sept 19, 2015
  *---------------------------------------------------------------------------------------
  * Modified from SMVC 2.2 - https://github.com/simple-mvc-framework/framework.git
  * @author Fábio Assunção da Silva - fabioassuncao.com
- * @version 1.0
+ * @version 0.0.1
  * @date February 06, 2016
  *---------------------------------------------------------------------------------------
  */

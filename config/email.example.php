@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Fábio Assunção - fabio@fabioassuncao.com.br
- * @version 1.0
+ * @version 0.0.1
  * @date February 06, 2016
  */
 

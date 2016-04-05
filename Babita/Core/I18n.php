@@ -3,7 +3,7 @@
  * I18n - Simple I18n handler.
  *
  * @author Fábio Assunção da Silva - fabioassuncao.com
- * @version 1.0
+ * @version 0.0.1
  * @date February 06, 2016
  */
 

@@ -3,7 +3,7 @@
  * Mailer
  *
  * @author Fábio Assunção da Silva - fabio@fabioassuncao.com.br
- * @version 1.0
+ * @version 0.0.1
  * @date Jul 31 2015
  * @date updated March 23, 2016
  */

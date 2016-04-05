@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Fábio Assunção - fabio@fabioassuncao.com.br
- * @version 1.0
+ * @version 0.0.1
  * @date February 06, 2016
  * @date updated April 04, 2016
  *
@@ -29,6 +29,11 @@ define('BABITA', ROOT);
 define('CONFIGDIR', BABITA.'config'.DS);
 
 /**
+ * Vendors directory
+ */
+define('VENDORDIR', BABITA.'vendor'.DS);
+
+/**
  * Load configs files
  */
 $filesConfig = [
@@ -50,8 +55,8 @@ foreach ($filesConfig as $file) {
 /**
  * load composer autoloader
  */
-if (file_exists(BABITA .'vendor'.DS.'autoload.php')) {
-    require (BABITA.'vendor'.DS.'autoload.php');
+if (file_exists(VENDORDIR.'autoload.php')) {
+    require (VENDORDIR.'autoload.php');
 } else {
     die('Please install via composer.json');
 }

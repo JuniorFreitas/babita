@@ -3,13 +3,13 @@
  * GeoCode Helper
  *
  * @author Mark Parrish - mark@pipcommunications.com - http://www.pipcommunications.com
- * @version 1.0
+ * @version 0.0.1
  * @date April 27, 2015
  * @date updated Sept 19, 2015
  *---------------------------------------------------------------------------------------
  * Modified from SMVC 2.2 - https://github.com/simple-mvc-framework/framework.git
  * @author Fábio Assunção da Silva - fabioassuncao.com
- * @version 1.0
+ * @version 0.0.1
  * @date February 06, 2016
  *---------------------------------------------------------------------------------------
  */
