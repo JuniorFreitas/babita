@@ -1,7 +1,5 @@
 ![logo.png](public/assets/img/framework/logo.png "Babita PHP Framework")
 
-# Version 1.0.0 beta
-
 ## What is Babita Framework?
 
 Babita is a [SMVC](https://github.com/simple-mvc-framework/framework) fork with several changes in the core of the Framework and adding new aid classes. Some of the new compontes were written / modified based on CakePHP. The principle of this design is simplicity, always.
