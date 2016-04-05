@@ -26,12 +26,57 @@ define('BABITA', ROOT);
 /**
  * Set settings directory
  */
-define('CONFIGDIR', BABITA.'config'.DS);
+define('CONFIG_DIR', ROOT.'config'.DS);
 
 /**
  * Vendors directory
  */
-define('VENDORDIR', BABITA.'vendor'.DS);
+define('VENDOR_DIR', ROOT.'vendor'.DS);
+
+/**
+ * System path
+ */
+define('SYSTEM_PATH', ROOT.'Babita'.DS);
+
+/**
+ * Application path
+ */
+define('APPLICATION_PATH', ROOT.'application'.DS);
+
+/**
+ * Errors log path
+ */
+define('ERRORS_PATH', ROOT.'log/error');
+
+/**
+ * Models path
+ */
+define('MODELS_PATH', ROOT.'application/Models');
+
+/**
+ * Views path
+ */
+define('VIEWS_PATH', ROOT.'application/views');
+
+/**
+ * Templates path
+ */
+define('TEMPLATES_PATH', ROOT.'application/templates');
+
+/**
+ * Controllers path
+ */
+define('CONTROLLERS_PATH', ROOT.'application/Controllers');
+
+/**
+ * Modules path
+ */
+define('MODULES_PATH', ROOT.'application/Modules');
+
+/**
+ * Languages path
+ */
+define('LANGUAGES_PATH', ROOT.'application/Languages');
 
 /**
  * Load configs files
@@ -44,19 +89,19 @@ $filesConfig = [
 ];
 
 foreach ($filesConfig as $file) {
-    $filePath = CONFIGDIR.$file;
+    $filePath = CONFIG_DIR.$file;
     if (file_exists($filePath)) {
         require ($filePath);
     }else{
-        die("{$file} not found. Create {$file} in ".CONFIGDIR);
+        die("{$file} not found. Create {$file} in ".CONFIG_DIR);
     }
 }
 
 /**
  * load composer autoloader
  */
-if (file_exists(VENDORDIR.'autoload.php')) {
-    require (VENDORDIR.'autoload.php');
+if (file_exists(VENDOR_DIR.'autoload.php')) {
+    require (VENDOR_DIR.'autoload.php');
 } else {
     die('Please install via composer.json');
 }
@@ -103,4 +148,3 @@ date_default_timezone_set(TIMEZONE);
  * Start sessions.
  */
 Babita\Helpers\Session::init();
-

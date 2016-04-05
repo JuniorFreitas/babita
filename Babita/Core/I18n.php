@@ -30,7 +30,7 @@ class I18n
      */
     public function __construct($name = "messages", $code = LANGUAGE_CODE)
     {
-        $file = BABITA.DS.LANGUAGES_PATH.DS."$code".DS."$name.php";
+        $file = LANGUAGES_PATH.DS."$code".DS."$name.php";
 
         if (is_readable($file)) {
                 $this->pack = include($file);
@@ -66,7 +66,7 @@ class I18n
      */
     public static function show($msgid, $name = "messages", $code = LANGUAGE_CODE)
     {
-        $file = BABITA.DS.LANGUAGES_PATH.DS."$code".DS."$name.php";
+        $file = LANGUAGES_PATH.DS."$code".DS."$name.php";
 
         if (is_readable($file)) {
             $pack = include($file);

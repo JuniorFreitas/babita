@@ -13,7 +13,7 @@
  *---------------------------------------------------------------------------------------
  */
 
-namespace Babita\Helpers;
+namespace Babita\Core;
 
 /**
  * Hooks allow code to be injected into various parts of the framework.
@@ -65,7 +65,7 @@ class Hooks
         ]);
 
         //load modules
-        self::loadPlugins(BABITA.DS.MODULES_PATH);
+        self::loadPlugins(MODULES_PATH);
         $instance = new self();
         self::$instances[$id] = $instance;
         return $instance;

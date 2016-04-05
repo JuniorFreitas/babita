@@ -3,7 +3,7 @@
  * @author Fábio Assunção - fabio@fabioassuncao.com.br
  * @version 0.0.1
  * @date February 06, 2016
- * @date updated March 14, 2016
+ * @date updated April 05, 2016
  */
 
 /*
@@ -28,51 +28,6 @@ define('ENVIRONMENT', 'development');
  */
 
 define('DIR', '/');
-
-/**
- * System path
- */
-define('SYSTEM_PATH', 'Babita');
-
-/**
- * Application path
- */
-define('APPLICATION_PATH', 'application');
-
-/**
- * Errors log path
- */
-define('ERRORS_PATH', 'log/error');
-
-/**
- * Models path
- */
-define('MODELS_PATH', 'application/Models');
-
-/**
- * Views path
- */
-define('VIEWS_PATH', 'application/views');
-
-/**
- * Templates path
- */
-define('TEMPLATES_PATH', 'application/templates');
-
-/**
- * Controllers path
- */
-define('CONTROLLERS_PATH', 'application/Controllers');
-
-/**
- * Modules path
- */
-define('MODULES_PATH', 'application/Modules');
-
-/**
- * Languages path
- */
-define('LANGUAGES_PATH', 'application/Languages');
 
 /**
  * Set default controller for legacy calls.

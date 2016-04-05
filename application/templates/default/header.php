@@ -5,7 +5,7 @@
 
 use Babita\Helpers\Assets;
 use Babita\Helpers\Url;
-use Babita\Helpers\Hooks;
+use Babita\Core\Hooks;
 
 //initialise hooks
 $hooks = Hooks::get();

@@ -53,7 +53,7 @@ class Logger
     private static function errorFile()
     {
         $today = date('Y-m-d');
-        return BABITA . "storage/logs/error-{$today}.html";
+        return ROOT . "storage/logs/error-{$today}.html";
     }
 
     /**

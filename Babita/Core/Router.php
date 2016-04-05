@@ -162,7 +162,7 @@ class Router
         $args = !empty($parts) ? $parts : [];
 
         // Check for file
-        if (!file_exists(BABITA.DS.CONTROLLERS_PATH.DS."$controller.php")) {
+        if (!file_exists(CONTROLLERS_PATH.DS."$controller.php")) {
             return false;
         }
 

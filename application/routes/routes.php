@@ -12,7 +12,7 @@
 
 /* Create alias for Router. */
 use Babita\Core\Router;
-use Babita\Helpers\Hooks;
+use Babita\Core\Hooks;
 
 $router = new Router();
 
