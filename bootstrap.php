@@ -32,7 +32,7 @@ foreach ($filesConfig as $file) {
     if (file_exists($filePath)) {
         require ($filePath);
     }else{
-        throw new \Exception("No {$file} found, configure {$file} in config folder ({$filePath}).");
+        die("No {$file} found, configure {$file} in config folder ({$filePath}). <br>\n");
     }
 }
 
