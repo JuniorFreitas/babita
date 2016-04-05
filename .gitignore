@@ -2,7 +2,6 @@ config/config.php
 config/database.php
 config/email.php
 config/session.php
-
 /storage/logs
 /tests
 /.phpintel
