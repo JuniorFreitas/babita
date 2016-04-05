@@ -1,4 +1,4 @@
 <?php
 
 require '../bootstrap.php';
-require '../config/routes_.php';
+require '../config/routes.php';
