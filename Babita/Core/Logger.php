@@ -53,7 +53,7 @@ class Logger
     private static function errorFile()
     {
         $today = date('Y-m-d');
-        return "error-{$today}.html";
+        return BABITA . "public/_errorlogs/error-{$today}.html";
     }
 
     /**
@@ -116,6 +116,7 @@ class Logger
         $file = $exception->getFile();
         $line = $exception->getLine();
         $trace = $exception->getTraceAsString();
+        $trace = str_replace(DB_USER, '********', $trace);
         $trace = str_replace(DB_PASS, '********', $trace);
         $date = date('Y-m-d H:i:s');
 
@@ -129,7 +130,7 @@ class Logger
            <pre>{$trace}</pre>\n
            <hr />\n";
 
-        if (is_file(self::errorFile()) === false) {
+        if (!is_file(self::errorFile())) {
             file_put_contents(self::errorFile(), '');
         }
 
@@ -164,7 +165,7 @@ class Logger
         $date = date('Y-m-d H:i:s');
         $logMessage = "<p>Error on $date - $error</p>";
 
-        if (is_file(self::errorFile()) === false) {
+        if (!is_file(self::errorFile())) {
             file_put_contents(self::errorFile(), '');
         }
 
