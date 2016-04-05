@@ -19,34 +19,29 @@ define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', realpath(dirname(__FILE__)).DS);
 
 /**
- * Define the absolute paths for configured directories
- */
-define('BABITA', ROOT);
-
-/**
  * Set settings directory
  */
-define('CONFIG_DIR', ROOT.'config'.DS);
+define('CONFIG_DIR', ROOT.'config');
 
 /**
  * Vendors directory
  */
-define('VENDOR_DIR', ROOT.'vendor'.DS);
+define('VENDOR_DIR', ROOT.'vendor');
 
 /**
  * System path
  */
-define('SYSTEM_PATH', ROOT.'Babita'.DS);
+define('SYSTEM_PATH', ROOT.'Babita');
 
 /**
  * Application path
  */
-define('APPLICATION_PATH', ROOT.'application'.DS);
+define('APPLICATION_PATH', ROOT.'application');
 
 /**
  * Errors log path
  */
-define('ERRORS_PATH', ROOT.'log/error');
+define('ERRORS_PATH', ROOT.'storage/log/error');
 
 /**
  * Models path
@@ -89,7 +84,7 @@ $filesConfig = [
 ];
 
 foreach ($filesConfig as $file) {
-    $filePath = CONFIG_DIR.$file;
+    $filePath = CONFIG_DIR.DS.$file;
     if (file_exists($filePath)) {
         require ($filePath);
     }else{
@@ -100,8 +95,8 @@ foreach ($filesConfig as $file) {
 /**
  * load composer autoloader
  */
-if (file_exists(VENDOR_DIR.'autoload.php')) {
-    require (VENDOR_DIR.'autoload.php');
+if (file_exists(VENDOR_DIR.DS.'autoload.php')) {
+    require (VENDOR_DIR.DS.'autoload.php');
 } else {
     die('Please install via composer.json');
 }

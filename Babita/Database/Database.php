@@ -38,8 +38,8 @@ class Database extends PDO
     {
         // Determining if exists or it's not empty, then use default group defined in config
 
-        if (!file_exists(CONFIGDIR . 'database.php')) {
-            die("database.php not found. Create database.php in ".CONFIGDIR);
+        if (!file_exists(CONFIG_DIR . 'database.php')) {
+            die("database.php not found. Create database.php in ".CONFIG_DIR);
         }
 
         $group = !$group

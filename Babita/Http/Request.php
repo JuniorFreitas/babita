@@ -12,7 +12,7 @@
  *---------------------------------------------------------------------------------------
  */
 
-namespace Babita\Helpers;
+namespace Babita\Http;
 
 /**
  * It contains the request information and provide methods to fetch request body.
