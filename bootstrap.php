@@ -24,15 +24,20 @@ define('ROOT', realpath(dirname(__FILE__)).DS);
 define('BABITA', ROOT);
 
 /**
+ * Set settings directory
+ */
+define('CONFIG', BABITA.'config'.DS);
+
+/**
  * Load configs files
  */
 $filesConfig = include_once "configs.php";
 foreach ($filesConfig as $file) {
-    $filePath = BABITA.'config'.DS.$file;
+    $filePath = CONFIG.$file;
     if (file_exists($filePath)) {
         require ($filePath);
     }else{
-        die("No {$file} found, configure {$file} in config folder ({$filePath}). <br>\n");
+        die("{$file} not found. Create {$file} in ".CONFIG);
     }
 }
 
