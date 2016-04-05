@@ -3,7 +3,7 @@
  * @author Fábio Assunção - fabio@fabioassuncao.com.br
  * @version 1.0
  * @date February 06, 2016
- * @date updated March 18, 2016
+ * @date updated April 04, 2016
  *
  * Bootstrap of BABITA SMVC
  */
@@ -24,15 +24,20 @@ define('ROOT', realpath(dirname(__FILE__)).DS);
 define('BABITA', ROOT);
 
 /**
+ * Set settings directory
+ */
+define('CONFIGDIR', BABITA.'config'.DS);
+
+/**
  * Load configs files
  */
 $filesConfig = include_once "configs.php";
 foreach ($filesConfig as $file) {
-    $filePath = BABITA.'config'.DS.$file;
+    $filePath = CONFIGDIR.$file;
     if (file_exists($filePath)) {
         require ($filePath);
     }else{
-        throw new \Exception("No {$file} found, configure {$file} in config folder ({$filePath}).");
+        die("{$file} not found. Create {$file} in ".CONFIGDIR);
     }
 }
 
@@ -42,7 +47,7 @@ foreach ($filesConfig as $file) {
 if (file_exists(BABITA .'vendor'.DS.'autoload.php')) {
     require (BABITA.'vendor'.DS.'autoload.php');
 } else {
-    throw new \Exception('Please install via composer.json');
+    die('Please install via composer.json');
 }
 
 /*
